@@ -40,7 +40,7 @@ function Home() {
   ));
   return (
     <div className="main-container">
-      <div className="head">
+      <div className="head" id="body">
         <div className="p-list">Product List</div>
         <Link to="/add-product">
           <button className="btn">ADD</button>
