@@ -1,0 +1,21 @@
+.product-card{
+    margin-top:15px ;
+    height: 150px;
+    width:100%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 30px;
+    
+
+
+}
+
+.delete-checkbox{
+    position:absolute;
+    top: 10px;
+    left:10px;
+    
+}
