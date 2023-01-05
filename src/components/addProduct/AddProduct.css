@@ -1,0 +1,38 @@
+.main-details{
+    display: grid;
+    width: 610px;
+    row-gap: 10px;
+    grid-template-columns: 1fr 1fr  ;
+    
+    margin: 25px 0px
+}
+
+
+.sku-fault{
+    grid-column: 1 / -1;
+    
+}
+
+
+.missing-info{
+    grid-column: 1 / -1;
+
+}
+.pro-details{
+    width: 610px;
+}
+
+
+.p-details{
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    column-gap: 5px;
+}
+
+.please-provide{
+    margin-bottom: 10px;
+}
+label{
+    
+}

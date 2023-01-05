@@ -50,7 +50,7 @@ function Home() {
         </button>
       </div>
       <div className="products-container">{productsList}</div>
-      Home
+   
     </div>
   );
 }

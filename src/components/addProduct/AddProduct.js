@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useAddProductMutation } from "../../services/myProductsApi";
+import "./AddProduct.css"
+import {
+  useAddProductMutation,
+  useGetProductsQuery,
+} from "../../services/myProductsApi";
 
 function AddProduct() {
   const [inputs, setInputs] = useState({ type: "DVD" });
@@ -10,66 +14,95 @@ function AddProduct() {
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
+  const {
+    data: productsData,
+    error: productsError,
+    isLoading: isProductsLoading,
+  } = useGetProductsQuery();
   const [addProduct, { data, isLoading: isAddLoading, error: addError }] =
     useAddProductMutation();
-  
-    
+
+  let skuArr = productsData?.map((e) => e.sku);
+  console.log(skuArr);
+
   const handleSave = (e) => {
     e.preventDefault();
-    let productData={};
+    let productData = {};
     switch (inputs.type) {
       case "DVD":
         productData = {
-            "name": inputs.name,
-            "price": inputs.price,
-            "sku": inputs.sku,
-            "type": inputs.type,
-            "dvd_size": inputs.dvd_size,
+          name: inputs.name,
+          price: inputs.price,
+          sku: inputs.sku,
+          type: inputs.type,
+          dvd_size: inputs.dvd_size,
         };
-        if(!inputs.name || !inputs.price || !inputs.sku || !inputs.dvd_size){
-            console.log("missing")
-           
+        if (inputs.name && inputs.price && inputs.sku && inputs.dvd_size ) {
+            if (skuArr?.includes(inputs.sku)) {
+                
+            }else{
+                console.log("save");
+                addProduct(productData)
+            }
+    }else{
+        console.log("missing")
+    }
+        break;
 
-        }
-
-            
-            break;
       case "Book":
         productData = {
-            "name": inputs.name,
-            "price": inputs.price,
-            "sku": inputs.sku,
-            "type": inputs.type,
-            "book_weight": inputs.book_weight,
+          name: inputs.name,
+          price: inputs.price,
+          sku: inputs.sku,
+          type: inputs.type,
+          book_weight: inputs.book_weight,
         };
+        if (inputs.name && inputs.price && inputs.sku && inputs.book_weight ) {
+            if (skuArr?.includes(inputs.sku)) {
+                console.log("same sku")
+            }else{
+                console.log("save");
+                addProduct(productData)
+
+            }
+    }else{
+        console.log("missing")
+    }
         break;
       case "Furniture":
         productData = {
-            "name": inputs.name,
-            "price": inputs.price,
-            "sku": inputs.sku,
-            "type": inputs.type,
-            "f_height":inputs.f_height,
-            "f_length":inputs.f_length,
-            "f_width":inputs.f_width
-
+          name: inputs.name,
+          price: inputs.price,
+          sku: inputs.sku,
+          type: inputs.type,
+          f_height: inputs.f_height,
+          f_length: inputs.f_length,
+          f_width: inputs.f_width,
         };
+        if (inputs.name && inputs.price && inputs.sku && inputs.f_height && inputs.f_length && inputs.f_width) {
+            if (skuArr?.includes(inputs.sku)) {
+                console.log("same sku")
+            }else{
+                console.log("save");
+                addProduct(productData)
+            }
+    }else{
+        console.log("missing")
+    }
         break;
 
       default:
         break;
-
     }
-    
-    //addProduct(productData)
   };
-  console.log(inputs);
+
   let attrDetails;
   switch (inputs.type) {
     case "DVD":
       attrDetails = (
-        <>
-          <div>Please provide DVD Size:</div>
+        <div className="pro-details">
+          <div className="please-provide">Please provide DVD Size:</div>
+          <div className="p-details">
           <label>Size (MB)</label>
           <input
             type="number"
@@ -77,14 +110,17 @@ function AddProduct() {
             name="dvd_size"
             onChange={handleChange}
             value={inputs.dvd_size || ""}
-          />
-        </>
+            />
+            {!inputs.dvd_size && <>please insert DVD size</>}
+            </div>
+        </div>
       );
       break;
     case "Book":
       attrDetails = (
-        <>
-          <div>Please provide book weight:</div>
+        <div className="pro-details" >
+          <div className="please-provide">Please provide book weight:</div>
+          <div className="p-details">
           <label>Weight (KG)</label>
           <input
             type="number"
@@ -93,13 +129,18 @@ function AddProduct() {
             onChange={handleChange}
             value={inputs.book_weight || ""}
           />
-        </>
+          {!inputs.book_weight && < >please insert book weight</>}
+          </div>
+        </div>
       );
       break;
     case "Furniture":
       attrDetails = (
-        <>
-          <div>Please provide Furniture Dimensions:</div>
+        <div className="pro-details">
+          <div className="please-provide">Please provide Furniture Dimensions:</div>
+          <div >
+
+          <div className="p-details">
           <label>Height (CM)</label>
           <input
             type="number"
@@ -108,6 +149,9 @@ function AddProduct() {
             onChange={handleChange}
             value={inputs.f_height || ""}
           />
+          {!inputs.f_height && <  >please insert Furniture height</>}
+          </div>
+          <div className="p-details">
           <label>Width (CM)</label>
           <input
             type="number"
@@ -116,6 +160,9 @@ function AddProduct() {
             onChange={handleChange}
             value={inputs.f_width || ""}
           />
+          {!inputs.f_width && <>please insert Furniture width</>}
+          </div>
+          <div className="p-details">
           <label>Length (CM)</label>
           <input
             type="number"
@@ -124,13 +171,19 @@ function AddProduct() {
             onChange={handleChange}
             value={inputs.f_length || ""}
           />
-        </>
+          {!inputs.f_length && <>please insert Furniture length</>}
+          </div>
+          </div>
+        </div>
       );
       break;
 
     default:
       <></>;
   }
+  let missingdata;
+  if(!inputs.sku || !inputs.name || !inputs.price ) {
+    missingdata = <div className="missing-info">please insert missing information</div>}
 
   return (
     <div>
@@ -143,21 +196,35 @@ function AddProduct() {
           <button className="btn">Cancel</button>
         </Link>
       </div>
-      
+
       <form id="product_form">
+        <div className="main-details">
+
         <label>Sku</label>
         <input type="text" name="sku" id="sku" onChange={handleChange} />
+        
+
+        {skuArr?.includes(inputs.sku) && (
+            <div className="sku-fault">sku is already used please chose another</div>
+            )}
+            
+        
+
         <label>name</label>
         <input type="text" name="name" id="name" onChange={handleChange} />
+        
+        
         <label>price</label>
         <input type="number" name="price" id="price" onChange={handleChange} />
+       {missingdata}
         <label>Type Switcher</label>
         <select id="productType" name="type" onChange={handleChange}>
           <option value="DVD">DVD</option>
           <option value="Book">Book</option>
           <option value="Furniture">Furniture</option>
         </select>
-       
+            </div>
+
         {attrDetails}
       </form>
     </div>
