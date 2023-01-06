@@ -3,8 +3,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const myProductsApi = createApi({
   // Set the baseUrl for every endpoint below
   reducerPath: 'myRecordApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/scandiPHP/' } ),
-  //baseQuery: fetchBaseQuery({ baseUrl: 'https://scandisalim.000webhostapp.com/' } ),
+  //baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/scandiPHP/' } ),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://scandisalim.000webhostapp.com/' } ),
   tagTypes: ['Request'],
   mode: "cors",
   endpoints: (builder) => ({
