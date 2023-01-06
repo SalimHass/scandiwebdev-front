@@ -39,6 +39,7 @@ function Home() {
     <ProductCard key={e.id} product={e} setDel={handleBox} />
   ));
   return (
+    
     <div className="main-container">
       <div className="head" >
         <div className="p-list">Product List</div>
@@ -49,12 +50,13 @@ function Home() {
           MASS DELETE
         </button>
       </div>
-      <body>
+      
 
       <div className="products-container">{productsList}</div>
-      </body>
+      
    
     </div>
+  
   );
 }
 
