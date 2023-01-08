@@ -14,23 +14,26 @@ export const myProductsApi = createApi({
         
       }),
       providesTags: ['Request'],
+      mode: "cors"
     }),
     addProduct: builder.mutation({
       query: (data) => ({
-        url: ``,
+        url: `create`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: data
+        body: data,
+        mode: "no-cors"
       }),
       invalidatesTags: ['Request'],
     }),
     deleteProducts: builder.mutation({
       query: (data) => ({
-        url: ``,
-        method: 'Delete',
+        url: `delete`,
+        method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         
-        body: data
+        body: data,
+        mode: "no-cors"
       }),
       invalidatesTags: ['Request'],
       
