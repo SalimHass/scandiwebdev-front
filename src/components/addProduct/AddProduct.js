@@ -229,9 +229,9 @@ function AddProduct() {
           {missingdata}
           <label>Type Switcher</label>
           <select id="productType" name="type" onChange={handleChange}>
-            <option value="DVD">DVD</option>
-            <option value="Book">Book</option>
-            <option value="Furniture">Furniture</option>
+            <option id="DVD" value="DVD">DVD</option>
+            <option id="Book" value="Book">Book</option>
+            <option  id="Furniture" value="Furniture">Furniture</option>
           </select>
         </div>
 
