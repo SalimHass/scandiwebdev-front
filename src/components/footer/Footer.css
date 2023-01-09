@@ -1,9 +1,7 @@
-.footer{ 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 8vh;
-    border-top: 2px solid #000000;
-    
-
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8vh;
+  border-top: 2px solid #000000;
 }

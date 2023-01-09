@@ -1,38 +1,40 @@
-.main-details{
-    display: grid;
-    width: 610px;
-    row-gap: 10px;
-    grid-template-columns: 1fr 1fr  ;
-    
-    margin: 25px 0px
+.add-page {
+  font-family: "Roboto";
+  font-size: 14px;
+}
+.main-details {
+  display: grid;
+  width: 610px;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 5px;
+  margin: 25px 0px;
 }
 
-
-.sku-fault{
-    grid-column: 1 / -1;
-    
+.sku-fault {
+  grid-column: 1 / -1;
 }
 
-
-.missing-info{
-    grid-column: 1 / -1;
-
+.missing-info {
+  grid-column: 1 / -1;
 }
-.pro-details{
-    width: 610px;
+.pro-details {
+  width: 610px;
 }
 
-
-.p-details{
-    
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    column-gap: 5px;
+.p-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 5px;
+  margin-top: 10px;
 }
 
-.please-provide{
-    margin-bottom: 10px;
+.please-provide {
+  margin-bottom: 10px;
 }
-label{
-    
+
+.f-details {
+  margin-left: 8px;
+}
+input {
+  max-height: 20px;
 }

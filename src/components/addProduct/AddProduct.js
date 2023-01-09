@@ -21,12 +21,8 @@ function AddProduct() {
     isLoading: isProductsLoading,
   } = useGetProductsQuery();
 
-  const [
-    addProduct,
-    mutationResult
-  ] = useAddProductMutation();
-  console.log(mutationResult)
-  
+  const [addProduct, mutationResult] = useAddProductMutation();
+  console.log(mutationResult);
 
   let skuArr = productsData?.map((e) => e.sku);
 
@@ -45,10 +41,7 @@ function AddProduct() {
         if (inputs.name && inputs.price && inputs.sku && inputs.dvd_size) {
           if (skuArr?.includes(inputs.sku)) {
           } else {
-            addProduct(productData);
-            //console.log("save");
             navigate("/");
-            
           }
         } else {
           console.log("missing");
@@ -97,7 +90,7 @@ function AddProduct() {
             console.log("same sku");
           } else {
             addProduct(productData);
-            
+
             navigate("/");
           }
         } else {
@@ -108,9 +101,7 @@ function AddProduct() {
       default:
         break;
     }
-
-};
-
+  };
 
   let attrDetails;
   switch (inputs.type) {
@@ -166,7 +157,9 @@ function AddProduct() {
                 onChange={handleChange}
                 value={inputs.f_height || ""}
               />
-              {!inputs.f_height && <>please insert Furniture height</>}
+              {!inputs.f_height && (
+                <div className="f-details">please insert Furniture height</div>
+              )}
             </div>
             <div className="p-details">
               <label>Width (CM)</label>
@@ -177,7 +170,9 @@ function AddProduct() {
                 onChange={handleChange}
                 value={inputs.f_width || ""}
               />
-              {!inputs.f_width && <>please insert Furniture width</>}
+              {!inputs.f_width && (
+                <div className="f-details">please insert Furniture width</div>
+              )}
             </div>
             <div className="p-details">
               <label>Length (CM)</label>
@@ -188,7 +183,9 @@ function AddProduct() {
                 onChange={handleChange}
                 value={inputs.f_length || ""}
               />
-              {!inputs.f_length && <>please insert Furniture length</>}
+              {!inputs.f_length && (
+                <div className="f-details">please insert Furniture length</div>
+              )}
             </div>
           </div>
         </div>
@@ -205,12 +202,8 @@ function AddProduct() {
     );
   }
 
-  
-  
-
-
   return (
-    <div>
+    <div className="add-page">
       <div className="head">
         <div className="p-list">Product Add</div>
         <button className="btn" onClick={handleSave}>

@@ -15,7 +15,12 @@ function ProductCard(props) {
       attr = <div>Weight: {props.product.book_weight} </div>;
       break;
     case "Furniture":
-      attr = <div>Dimension: {props.product.height}X{props.product.width}X{props.product.length} </div>;
+      attr = (
+        <div>
+          Dimension: {props.product.height}X{props.product.width}X
+          {props.product.length}{" "}
+        </div>
+      );
       break;
     default:
       break;
@@ -24,7 +29,7 @@ function ProductCard(props) {
   return (
     <div className="product-card">
       <input type="checkbox" className="delete-checkbox" onClick={handleBox} />
-      
+
       <div>{props.product.sku}</div>
       <div>{props.product.name}</div>
       <div>{props.product.price} $</div>

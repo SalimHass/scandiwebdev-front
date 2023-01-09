@@ -1,13 +1,12 @@
-import React from 'react'
-import './Footer.css'
+import React from "react";
+import "./Footer.css";
 
 function Footer() {
   return (
-    <div className='footer'>
-      
+    <div className="footer">
       <div>Scandiweb test Assignment</div>
-      </div>
-  )
+    </div>
+  );
 }
 
-export default Footer
+export default Footer;
