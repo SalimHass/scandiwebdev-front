@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./AddProduct.css";
 import {
@@ -14,16 +14,22 @@ function AddProduct() {
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
+  const navigate = useNavigate();
   const {
     data: productsData,
     error: productsError,
     isLoading: isProductsLoading,
   } = useGetProductsQuery();
-  const [addProduct, { data, isLoading: isAddLoading, error: addError }] =
-    useAddProductMutation();
+
+  const [
+    addProduct,
+    mutationResult
+  ] = useAddProductMutation();
+  console.log(mutationResult)
+  
 
   let skuArr = productsData?.map((e) => e.sku);
-  
+
   const handleSave = (e) => {
     e.preventDefault();
     let productData = {};
@@ -39,8 +45,10 @@ function AddProduct() {
         if (inputs.name && inputs.price && inputs.sku && inputs.dvd_size) {
           if (skuArr?.includes(inputs.sku)) {
           } else {
-            console.log("save");
             addProduct(productData);
+            //console.log("save");
+            navigate("/");
+            
           }
         } else {
           console.log("missing");
@@ -59,8 +67,9 @@ function AddProduct() {
           if (skuArr?.includes(inputs.sku)) {
             console.log("same sku");
           } else {
-            console.log("save");
             addProduct(productData);
+            console.log("save");
+            navigate("/");
           }
         } else {
           console.log("missing");
@@ -87,8 +96,9 @@ function AddProduct() {
           if (skuArr?.includes(inputs.sku)) {
             console.log("same sku");
           } else {
-            console.log("save");
             addProduct(productData);
+            
+            navigate("/");
           }
         } else {
           console.log("missing");
@@ -98,7 +108,9 @@ function AddProduct() {
       default:
         break;
     }
-  };
+
+};
+
 
   let attrDetails;
   switch (inputs.type) {
@@ -193,6 +205,10 @@ function AddProduct() {
     );
   }
 
+  
+  
+
+
   return (
     <div>
       <div className="head">
@@ -229,9 +245,15 @@ function AddProduct() {
           {missingdata}
           <label>Type Switcher</label>
           <select id="productType" name="type" onChange={handleChange}>
-            <option id="DVD" value="DVD">DVD</option>
-            <option id="Book" value="Book">Book</option>
-            <option  id="Furniture" value="Furniture">Furniture</option>
+            <option id="DVD" value="DVD">
+              DVD
+            </option>
+            <option id="Book" value="Book">
+              Book
+            </option>
+            <option id="Furniture" value="Furniture">
+              Furniture
+            </option>
           </select>
         </div>
 

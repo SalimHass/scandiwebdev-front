@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const myProductsApi = createApi({
   // Set the baseUrl for every endpoint below
-  reducerPath: 'myRecordApi',
+  reducerPath: 'productsApi',
   //baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/scandiPHP/' } ),
   baseQuery: fetchBaseQuery({ baseUrl: 'https://scandisalim.000webhostapp.com/' } ),
   tagTypes: ['Request'],
@@ -24,7 +24,7 @@ export const myProductsApi = createApi({
         body: data,
         mode: "no-cors"
       }),
-      invalidatesTags: ['Request'],
+      invalidatesTags: ['Request']
     }),
     deleteProducts: builder.mutation({
       query: (data) => ({
@@ -35,7 +35,7 @@ export const myProductsApi = createApi({
         body: data,
         mode: "no-cors"
       }),
-      invalidatesTags: ['Request'],
+      invalidatesTags: ['Request']
       
     }),
   }),
