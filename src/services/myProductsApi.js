@@ -5,7 +5,7 @@ export const myProductsApi = createApi({
   reducerPath: "productsApi",
   //baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost/scandiPHP/' } ),
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://scandisalim.000webhostapp.com/",
+   baseUrl: "https://scandisalim.000webhostapp.com/",
   }),
   tagTypes: ["Request"],
   mode: "cors",

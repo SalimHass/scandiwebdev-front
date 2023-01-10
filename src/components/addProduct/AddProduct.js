@@ -9,6 +9,7 @@ import {
 
 function AddProduct() {
   const [inputs, setInputs] = useState({ type: "DVD" });
+  const [missingData, setMissingData]=useState();
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -25,6 +26,8 @@ function AddProduct() {
   console.log(mutationResult);
 
   let skuArr = productsData?.map((e) => e.sku);
+  
+  
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -44,7 +47,9 @@ function AddProduct() {
             navigate("/");
           }
         } else {
-          console.log("missing");
+          setMissingData (
+            <div className="missing-info">please fill all fields </div>
+          );
         }
         break;
 
@@ -65,7 +70,9 @@ function AddProduct() {
             navigate("/");
           }
         } else {
-          console.log("missing");
+          setMissingData (
+            <div className="missing-info">please fill all fields </div>
+          );
         }
         break;
       case "Furniture":
@@ -94,7 +101,9 @@ function AddProduct() {
             navigate("/");
           }
         } else {
-          console.log("missing");
+          setMissingData (
+            <div className="missing-info">please fill all fields </div>
+          );
         }
         break;
 
@@ -118,7 +127,7 @@ function AddProduct() {
               onChange={handleChange}
               value={inputs.dvd_size || ""}
             />
-            {!inputs.dvd_size && <>please insert DVD size</>}
+            
           </div>
         </div>
       );
@@ -136,7 +145,6 @@ function AddProduct() {
               onChange={handleChange}
               value={inputs.book_weight || ""}
             />
-            {!inputs.book_weight && <>please insert book weight</>}
           </div>
         </div>
       );
@@ -157,9 +165,7 @@ function AddProduct() {
                 onChange={handleChange}
                 value={inputs.f_height || ""}
               />
-              {!inputs.f_height && (
-                <div className="f-details">please insert Furniture height</div>
-              )}
+              
             </div>
             <div className="p-details">
               <label>Width (CM)</label>
@@ -170,9 +176,7 @@ function AddProduct() {
                 onChange={handleChange}
                 value={inputs.f_width || ""}
               />
-              {!inputs.f_width && (
-                <div className="f-details">please insert Furniture width</div>
-              )}
+              
             </div>
             <div className="p-details">
               <label>Length (CM)</label>
@@ -183,9 +187,7 @@ function AddProduct() {
                 onChange={handleChange}
                 value={inputs.f_length || ""}
               />
-              {!inputs.f_length && (
-                <div className="f-details">please insert Furniture length</div>
-              )}
+              
             </div>
           </div>
         </div>
@@ -195,12 +197,7 @@ function AddProduct() {
     default:
       <></>;
   }
-  let missingdata;
-  if (!inputs.sku || !inputs.name || !inputs.price) {
-    missingdata = (
-      <div className="missing-info">please insert missing information</div>
-    );
-  }
+  
 
   return (
     <div className="add-page">
@@ -213,6 +210,7 @@ function AddProduct() {
           <button className="btn">Cancel</button>
         </Link>
       </div>
+      {missingData}
 
       <form id="product_form">
         <div className="main-details">
@@ -225,17 +223,17 @@ function AddProduct() {
             </div>
           )}
 
-          <label>name</label>
+          <label>Name</label>
           <input type="text" name="name" id="name" onChange={handleChange} />
 
-          <label>price</label>
+          <label>Price</label>
           <input
             type="number"
             name="price"
             id="price"
             onChange={handleChange}
           />
-          {missingdata}
+          
           <label>Type Switcher</label>
           <select id="productType" name="type" onChange={handleChange}>
             <option id="DVD" value="DVD">
@@ -252,6 +250,7 @@ function AddProduct() {
 
         {attrDetails}
       </form>
+      
     </div>
   );
 }
